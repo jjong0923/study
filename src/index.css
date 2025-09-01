@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* 스크롤 바 없애기 */
+/* Chrome, Safari, Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
