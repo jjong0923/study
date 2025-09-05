@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import Head from "../components/Head";
 
 function SignUpPage() {
   const [id, setId] = useState<string>("");
@@ -10,9 +11,7 @@ function SignUpPage() {
   return (
     <form className="flex h-lvh flex-col items-center justify-start bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 pt-30">
       <div className="flex w-[50vh] flex-col rounded-xl bg-white p-8 shadow-lg">
-        <h1 className="text-center text-3xl font-bold text-gray-700">
-          회원가입
-        </h1>
+        <Head text="회원가입" />
         <Input
           type="text"
           label="아이디"

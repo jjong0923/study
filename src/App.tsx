@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom"; // npm install react-router-dom
 import "./App.css";
 import Layout from "./layouts/Layout";
 import LoginPage from "./pages/LoginPage";

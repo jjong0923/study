@@ -1,7 +1,10 @@
+import { useRef, useState } from "react";
+// import useAccountStore from "../store/useAccountStore";
 import Editor from "../components/todo/Editor";
 import Title from "../components/todo/Title";
 import TodoList from "../components/todo/TodoList";
-import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 
 export interface TodoItem {
   id: number;
@@ -44,6 +47,8 @@ const todoMockData: TodoItem[] = [
 ];
 
 function TodoPage() {
+  // const account = useAccountStore((state) => state.account);
+  const account = useSelector((state: RootState) => state.account.account);
   const [todo, setTodo] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(todoMockData);
 
@@ -75,8 +80,8 @@ function TodoPage() {
 
   return (
     <div className="flex h-screen w-full flex-col items-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-12 pb-12">
-      <Title />
-      <div className="no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-hidden overflow-y-scroll rounded-xl bg-white p-4 shadow-lg">
+      <Title account={account} />
+      <div className="no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll rounded-xl bg-white p-4 shadow-lg">
         <Editor
           value={todo}
           onChange={(e) => setTodo(e.target.value)}

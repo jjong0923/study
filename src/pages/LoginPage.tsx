@@ -1,10 +1,17 @@
 import { useState } from "react";
-import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
+// import useAccountStore from "../store/useAccountStore";
+import Input from "../components/Input";
 import Button from "../components/Button";
+import Head from "../components/Head";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../store/store";
+import { setAccount } from "../store/accountSlice";
 
 function LoginPage() {
   const navigate = useNavigate();
+  // const setAccount = useAccountStore((state) => state.setAccount);
+  const dispatch = useDispatch<AppDispatch>();
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [idBlur, setIdBlur] = useState<boolean>(false);
@@ -24,11 +31,16 @@ function LoginPage() {
   //     setError(res.message);
   //   }
   // };
+  const handleLogin = () => {
+    // setAccount(id);
+    dispatch(setAccount(id));
+    navigate("/");
+  };
 
   return (
     <form className="flex h-lvh flex-col items-center justify-start bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 pt-30">
       <div className="flex w-[50vh] flex-col rounded-xl bg-white p-8 shadow-lg">
-        <h1 className="text-center text-3xl font-bold text-gray-700">로그인</h1>
+        <Head text="로그인" />
         <Input
           type="text"
           label="아이디"
@@ -47,7 +59,7 @@ function LoginPage() {
           isIn={!pw}
           isBlur={pwBlur}
         />
-        <Button text="Login" />
+        <Button text="Login" onClick={handleLogin} type="button" />
         <p className="mt-1">
           계정이 없으신가요?{" "}
           <span className="cursor-pointer text-blue-400" onClick={goToSignup}>
