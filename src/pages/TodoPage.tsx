@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 // import useAccountStore from "../store/useAccountStore";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import { useTheme } from "../context/ThemeContext";
 import Editor from "../components/todo/Editor";
 import Title from "../components/todo/Title";
 import TodoList from "../components/todo/TodoList";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
 
 export interface TodoItem {
   id: number;
@@ -51,6 +52,7 @@ function TodoPage() {
   const account = useSelector((state: RootState) => state.account.account);
   const [todo, setTodo] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(todoMockData);
+  const { theme, toggleTheme } = useTheme();
 
   const idRef = useRef<number>(list.length + 1);
 
@@ -79,7 +81,19 @@ function TodoPage() {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col items-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-12 pb-12">
+    <div
+      className={`${
+        theme === "light"
+          ? "bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50"
+          : "bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white"
+      } flex h-screen w-full flex-col items-center pt-12 pb-12`}
+    >
+      <button
+        className="absolute right-6 mb-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        onClick={toggleTheme}
+      >
+        choose Theme
+      </button>
       <Title account={account} />
       <div className="no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll rounded-xl bg-white p-4 shadow-lg">
         <Editor
