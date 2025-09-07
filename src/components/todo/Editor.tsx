@@ -1,13 +1,17 @@
+import { useTheme } from "../../context/ThemeContext";
+
 interface EditorProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
 }
 function Editor({ value, onChange, onClick }: EditorProps) {
+  const { theme } = useTheme();
+
   return (
     <div className="flex w-full gap-2 border-b-2 border-gray-200 pb-4">
       <input
-        className="flex-1 rounded-xl border px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+        className={`${theme === "light" ? "bg-white text-black placeholder-gray-400" : "bg-gray-700 text-white placeholder-gray-300"} flex-1 rounded-xl border px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none`}
         value={value}
         type="text"
         placeholder="할 일을 입력하세요"

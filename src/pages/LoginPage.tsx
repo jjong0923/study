@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import useAccountStore from "../store/useAccountStore";
+import useAccountStore from "../store/useAccountStore";
+// import { useDispatch } from "react-redux";
+// import type { AppDispatch } from "../store/store";
+// import { setAccount } from "../store/accountSlice";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Head from "../components/Head";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../store/store";
-import { setAccount } from "../store/accountSlice";
 
 function LoginPage() {
   const navigate = useNavigate();
-  // const setAccount = useAccountStore((state) => state.setAccount);
-  const dispatch = useDispatch<AppDispatch>();
+  const setAccount = useAccountStore((state) => state.setAccount);
+  // const dispatch = useDispatch<AppDispatch>();
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [idBlur, setIdBlur] = useState<boolean>(false);
@@ -32,8 +32,8 @@ function LoginPage() {
   //   }
   // };
   const handleLogin = () => {
-    // setAccount(id);
-    dispatch(setAccount(id));
+    setAccount(id);
+    // dispatch(setAccount(id));
     navigate("/");
   };
 

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-// import useAccountStore from "../store/useAccountStore";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
+import useAccountStore from "../store/useAccountStore";
+// import { useSelector } from "react-redux";
+// import type { RootState } from "../store/store";
 import { useTheme } from "../context/ThemeContext";
 import Editor from "../components/todo/Editor";
 import Title from "../components/todo/Title";
@@ -48,14 +48,15 @@ const todoMockData: TodoItem[] = [
 ];
 
 function TodoPage() {
-  // const account = useAccountStore((state) => state.account);
-  const account = useSelector((state: RootState) => state.account.account);
+  const account = useAccountStore((state) => state.account);
+  // const account = useSelector((state: RootState) => state.account.account);
   const [todo, setTodo] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(todoMockData);
   const { theme, toggleTheme } = useTheme();
 
   const idRef = useRef<number>(list.length + 1);
 
+  // 이벤트 함수들 커스텀 hook?
   const addList = () => {
     if (todo.trim() === "") return;
     const newTodo: TodoItem = {
@@ -87,15 +88,22 @@ function TodoPage() {
           ? "bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50"
           : "bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white"
       } flex h-screen w-full flex-col items-center pt-12 pb-12`}
+      // <div className="flex h-screen w-full flex-col items-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-12 pb-12 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
     >
       <button
-        className="absolute right-6 mb-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        className="absolute right-6 bottom-0 mb-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         onClick={toggleTheme}
       >
-        choose Theme
+        {theme === "light" ? "Dark" : "light"}
       </button>
       <Title account={account} />
-      <div className="no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll rounded-xl bg-white p-4 shadow-lg">
+      <div
+        className={`${
+          theme === "light"
+            ? "bg-white"
+            : "border border-gray-600 bg-gray-800 shadow-lg"
+        }no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll rounded-xl p-4 shadow-lg`}
+      >
         <Editor
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
