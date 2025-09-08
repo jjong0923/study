@@ -1,7 +1,7 @@
 interface AccountButtonProps {
   text: string;
   onClick: () => void;
-  type: "button";
+  type: "button" | "submit";
 }
 
 function AccountButton({ text, onClick, type }: AccountButtonProps) {

@@ -40,7 +40,7 @@ function SignUpPage() {
           isIn={!pw}
           isBlur={pwBlur}
         />
-        <AccountButton text="Sign up" />
+        <AccountButton text="Sign up" type="button" />
       </AccountForm>
     </AccountBg>
   );

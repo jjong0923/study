@@ -21,6 +21,7 @@ function LoginPage() {
   const navigate = useNavigate();
   const setAccount = useAccountStore((state) => state.setAccount);
   // const dispatch = useDispatch<AppDispatch>();
+  // 객체로 관리
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [idBlur, setIdBlur] = useState<boolean>(false);
@@ -46,6 +47,7 @@ function LoginPage() {
     navigate("/");
   };
 
+  // form onsubmit - button submit
   return (
     <AccountBg>
       <AccountForm>
