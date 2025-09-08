@@ -1,4 +1,3 @@
-import { useTheme } from "../../context/ThemeContext";
 import type { TodoItem } from "../../pages/TodoPage";
 import Status from "./Status";
 // import { Bars3Icon } from "@heroicons/react/24/outline"; // npm install @heroicons/react
@@ -10,13 +9,9 @@ interface TodoListProps {
 }
 
 function TodoList({ item, onDelete, onUpdate }: TodoListProps) {
-  const { theme } = useTheme();
-
   return (
     <>
-      <div
-        className={`${theme === "light" ? "border-gray-200 bg-gray-50" : "border-gray-600 bg-gray-700"} relative flex items-center rounded-lg border px-6 py-4 shadow-sm`}
-      >
+      <div className="relative flex items-center rounded-lg border border-gray-200 bg-gray-50 px-6 py-4 shadow-sm dark:border-gray-600 dark:bg-gray-700">
         <input
           className="h-4 w-4 cursor-pointer"
           type="checkbox"
@@ -24,14 +19,10 @@ function TodoList({ item, onDelete, onUpdate }: TodoListProps) {
           onChange={() => onUpdate(item.id)}
         />
         <div className="ml-4">
-          <p
-            className={`${theme === "light" ? "text-gray-800" : "text-gray-100"}text-lg font-semibold`}
-          >
+          <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">
             {item.title}
           </p>
-          <p
-            className={`${theme === "light" ? "text-gray-500" : "text-gray-400"}text-sm `}
-          >
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             {item.createdAt}
           </p>
         </div>

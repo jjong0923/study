@@ -1,11 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAccountStore from "../store/useAccountStore";
 // import { useSelector } from "react-redux";
 // import type { RootState } from "../store/store";
 import { useTheme } from "../context/ThemeContext";
-import Editor from "../components/todo/Editor";
-import Title from "../components/todo/Title";
-import TodoList from "../components/todo/TodoList";
+import { ThemeButton, Title, Editor, TodoList } from "../components/todo";
 
 export interface TodoItem {
   id: number;
@@ -48,6 +47,7 @@ const todoMockData: TodoItem[] = [
 ];
 
 function TodoPage() {
+  const navigate = useNavigate();
   const account = useAccountStore((state) => state.account);
   // const account = useSelector((state: RootState) => state.account.account);
   const [todo, setTodo] = useState<string>("");
@@ -81,29 +81,15 @@ function TodoPage() {
     );
   };
 
+  useEffect(() => {
+    if (!account) navigate("/login");
+  }, []);
+
   return (
-    <div
-      className={`${
-        theme === "light"
-          ? "bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50"
-          : "bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white"
-      } flex h-screen w-full flex-col items-center pt-12 pb-12`}
-      // <div className="flex h-screen w-full flex-col items-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-12 pb-12 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
-    >
-      <button
-        className="absolute right-6 bottom-0 mb-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-        onClick={toggleTheme}
-      >
-        {theme === "light" ? "Dark" : "light"}
-      </button>
+    <div className="flex h-screen w-full flex-col items-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-12 pb-12 dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
+      <ThemeButton theme={theme} onClick={toggleTheme} />
       <Title account={account} />
-      <div
-        className={`${
-          theme === "light"
-            ? "bg-white"
-            : "border border-gray-600 bg-gray-800 shadow-lg"
-        }no-scrollbar mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll rounded-xl p-4 shadow-lg`}
-      >
+      <div className="no-scrollbar rounded-x1 mt-10 flex w-[40%] min-w-[350px] flex-col justify-between gap-8 overflow-y-scroll bg-white p-4 shadow-lg dark:border dark:border-gray-600 dark:bg-gray-800">
         <Editor
           value={todo}
           onChange={(e) => setTodo(e.target.value)}

@@ -4,9 +4,18 @@ import useAccountStore from "../store/useAccountStore";
 // import { useDispatch } from "react-redux";
 // import type { AppDispatch } from "../store/store";
 // import { setAccount } from "../store/accountSlice";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import Head from "../components/Head";
+// import AccountBg from "../components/account/AccountBg";
+// import AccountForm from "../components/account/AccountForm";
+// import Head from "../components/account/Head";
+// import AccountInput from "../components/account/AccountInput";
+// import Button from "../components/account/Button";
+import {
+  AccountBg,
+  AccountForm,
+  AccountHead,
+  AccountInput,
+  AccountButton,
+} from "../components/account";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -38,10 +47,10 @@ function LoginPage() {
   };
 
   return (
-    <form className="flex h-lvh flex-col items-center justify-start bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 pt-30">
-      <div className="flex w-[50vh] flex-col rounded-xl bg-white p-8 shadow-lg">
-        <Head text="로그인" />
-        <Input
+    <AccountBg>
+      <AccountForm>
+        <AccountHead text="로그인" />
+        <AccountInput
           type="text"
           label="아이디"
           onChange={(e) => setId(e.target.value)}
@@ -50,7 +59,7 @@ function LoginPage() {
           isIn={!id}
           isBlur={idBlur}
         />
-        <Input
+        <AccountInput
           type="password"
           label="비밀번호"
           onChange={(e) => setPw(e.target.value)}
@@ -59,15 +68,15 @@ function LoginPage() {
           isIn={!pw}
           isBlur={pwBlur}
         />
-        <Button text="Login" onClick={handleLogin} type="button" />
+        <AccountButton text="Login" onClick={handleLogin} type="button" />
         <p className="mt-1">
           계정이 없으신가요?{" "}
           <span className="cursor-pointer text-blue-400" onClick={goToSignup}>
             sign up
           </span>
         </p>
-      </div>
-    </form>
+      </AccountForm>
+    </AccountBg>
   );
 }
 

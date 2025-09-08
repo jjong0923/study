@@ -1,11 +1,11 @@
-interface HeadProps {
+interface AccountHeadProps {
   text: string;
 }
 
-function Head({ text }: HeadProps) {
+function AccountHead({ text }: AccountHeadProps) {
   return (
     <h1 className="text-center text-3xl font-bold text-gray-700">{text}</h1>
   );
 }
 
-export default Head;
+export default AccountHead;
