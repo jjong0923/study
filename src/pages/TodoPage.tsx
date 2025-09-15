@@ -81,6 +81,7 @@ function TodoPage() {
     );
   };
 
+  // 로그아웃 추가 시 account 의존성 추가
   useEffect(() => {
     if (!account) navigate("/login");
   }, []);

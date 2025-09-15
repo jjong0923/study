@@ -25,19 +25,21 @@ function SignUpPage() {
         <AccountInput
           type="text"
           label="아이디"
+          value={id}
           onChange={(e) => setId(e.target.value)}
           onBlur={() => setIdBlur(true)}
           placeholder="아이디릅 입력해주세요."
-          isIn={!id}
+          isEmpty={!id}
           isBlur={idBlur}
         />
         <AccountInput
           type="password"
           label="비밀번호"
+          value={pw}
           onChange={(e) => setPw(e.target.value)}
           onBlur={() => setPwBlur(true)}
           placeholder="비밀번호를 입력해주세요."
-          isIn={!pw}
+          isEmpty={!pw}
           isBlur={pwBlur}
         />
         <AccountButton text="Sign up" type="button" />

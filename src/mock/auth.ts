@@ -2,22 +2,23 @@
 export interface User {
   id: string;
   password: string;
-  name: string;
 }
 
 export const mockUsers: User[] = [
-  { id: "user1", password: "1234", name: "홍길동" },
-  { id: "user2", password: "abcd", name: "김철수" },
-  { id: "test", password: "test", name: "테스트 계정" },
-  { id: "johndoe", password: "pass1234", name: "John Doe" },
-  { id: "janedoe", password: "qwerty", name: "Jane Doe" },
-  { id: "lee_sun", password: "sun2023", name: "이선" },
-  { id: "park_hyun", password: "hyun!@#", name: "박현" },
-  { id: "choi_min", password: "min987", name: "최민" },
-  { id: "kim_jiwoo", password: "jiwoo000", name: "김지우" },
-  { id: "seo_hyun", password: "sh!2025", name: "서현" },
-  { id: "test_user1", password: "password1", name: "테스터1" },
-  { id: "test_user2", password: "password2", name: "테스터2" },
+  { id: "user1", password: "1234" },
+  { id: "user2", password: "abcd" },
+  { id: "test", password: "test" },
+  { id: "johndoe", password: "pass1234" },
+  { id: "janedoe", password: "qwerty" },
+  { id: "lee_sun", password: "sun2023" },
+  { id: "park_hyun", password: "hyun!@#" },
+  { id: "choi_min", password: "min987" },
+  { id: "kim_jiwoo", password: "jiwoo000" },
+  { id: "seo_hyun", password: "sh!2025" },
+  { id: "test_user1", password: "password1" },
+  { id: "test_user2", password: "password2" },
+  { id: "kangneng", password: "knu2025" },
+  { id: "kang", password: "knu2025" },
 ];
 
 /**

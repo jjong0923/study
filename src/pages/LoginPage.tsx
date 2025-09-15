@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginMock } from "../mock/auth";
 import useAccountStore from "../store/useAccountStore";
 // import { useDispatch } from "react-redux";
 // import type { AppDispatch } from "../store/store";
@@ -17,34 +18,39 @@ import {
   AccountButton,
 } from "../components/account";
 
+interface userObj {
+  id: string;
+  pw: string;
+  idBlur: boolean;
+  pwBlur: boolean;
+}
+
 function LoginPage() {
   const navigate = useNavigate();
   const setAccount = useAccountStore((state) => state.setAccount);
   // const dispatch = useDispatch<AppDispatch>();
-  // 객체로 관리
-  const [id, setId] = useState<string>("");
-  const [pw, setPw] = useState<string>("");
-  const [idBlur, setIdBlur] = useState<boolean>(false);
-  const [pwBlur, setPwBlur] = useState<boolean>(false);
-  // const [isLogin, setIsLogin] = useState<boolean>(false);
+
+  const [user, setUser] = useState<userObj>({
+    id: "",
+    pw: "",
+    idBlur: false,
+    pwBlur: false,
+  });
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const goToSignup = () => {
     navigate("/signup");
   };
 
-  //  const handleLogin = async () => {
-  //   const res = await loginMock(id, pw);
-  //   if (res.success) {
-  //     alert(`환영합니다, ${res.user.name}님!`);
-  //     setError("");
-  //   } else {
-  //     setError(res.message);
-  //   }
-  // };
-  const handleLogin = () => {
-    setAccount(id);
-    // dispatch(setAccount(id));
-    navigate("/");
+  const handleLogin = async () => {
+    const res = await loginMock(user.id, user.pw);
+    if (res.success) {
+      alert("로그인 성공!");
+      setAccount(user.id);
+      navigate("/");
+    } else {
+      setIsLogin(true);
+    }
   };
 
   // form onsubmit - button submit
@@ -55,21 +61,26 @@ function LoginPage() {
         <AccountInput
           type="text"
           label="아이디"
-          onChange={(e) => setId(e.target.value)}
-          onBlur={() => setIdBlur(true)}
+          value={user.id}
+          onChange={(e) => setUser({ ...user, id: e.target.value })}
+          onBlur={() => setUser({ ...user, idBlur: true })}
           placeholder="아이디릅 입력해주세요."
-          isIn={!id}
-          isBlur={idBlur}
+          isEmpty={!user.id}
+          isBlur={user.idBlur}
         />
         <AccountInput
           type="password"
           label="비밀번호"
-          onChange={(e) => setPw(e.target.value)}
-          onBlur={() => setPwBlur(true)}
+          value={user.pw}
+          onChange={(e) => setUser({ ...user, pw: e.target.value })}
+          onBlur={() => setUser({ ...user, pwBlur: true })}
           placeholder="비밀번호를 입력해주세요."
-          isIn={!pw}
-          isBlur={pwBlur}
+          isEmpty={!user.pw}
+          isBlur={user.pwBlur}
         />
+        {isLogin && (
+          <p className="text-red-400">아이디 또는 비밀번호가 틀렸습니다.</p>
+        )}
         <AccountButton text="Login" onClick={handleLogin} type="button" />
         <p className="mt-1">
           계정이 없으신가요?{" "}
